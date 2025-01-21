@@ -27,12 +27,9 @@ public class Cart {
         totalCost = items.stream().mapToDouble(CartItem::calculatePrice).sum();
         return totalCost;
     }
- 
+    
     public double getDiscountedTotalCost() {
-        for(CartItem c:items){
-            double discount=(c.getBook().getDiscountPercentage()/100)*c.getQuantity()*c.getBook().getPrice();
-            totalCost-=discount;
-        }
+        items.forEach(item -> totalCost-=(item.getBook().getDiscountPercentage()/100)*item.getQuantity()*item.getBook().getPrice());
         return totalCost;
     }
  
